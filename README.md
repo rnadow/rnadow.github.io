@@ -16,6 +16,8 @@ rnadow-blog/
 ├── feed.xml              # RSS 订阅源（发新文章后手动加一条 <item>）
 ├── sitemap.xml           # 站点地图
 ├── robots.txt
+├── assets/
+│   └── hero-desk.jpg     # 首页拱形配图（清晨书桌）
 ├── og-image.png          # 社交分享预览图（1280×640，og:image / GitHub Social preview 共用）
 ├── og.html               # 预览图生成源文件：本地打开 → 视口设为 1280×640 → 截图即可重新生成
 └── posts/                # 文章页，每篇文章一个目录（URL 干净）
