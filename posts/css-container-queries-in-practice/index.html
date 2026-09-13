@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS 容器查询实战：告别媒体查询的组件级响应式 · rnadow 的小站</title>
+  <meta name="description" content="容器查询让组件真正「自成一体」，不再依赖视口宽度。本文用三个实际组件演示 @container 的写法、cqw 单位与降级方案。">
+  <link rel="canonical" href="https://rnadow.top/posts/css-container-queries-in-practice/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CSS 容器查询实战：告别媒体查询的组件级响应式">
+  <meta property="og:description" content="容器查询让组件真正「自成一体」，不再依赖视口宽度。">
+  <meta property="og:url" content="https://rnadow.top/posts/css-container-queries-in-practice/">
+  <meta property="article:published_time" content="2026-07-18">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%235b5ef4'/%3E%3Ctext x='50' y='71' font-size='56' font-weight='700' text-anchor='middle' fill='white' font-family='Arial'%3Er%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <meta property="og:image" content="https://rnadow.top/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://rnadow.top/og-image.png">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <header class="site-header" id="site-header">
+    <nav class="container">
+      <a class="logo" href="../../index.html">rnadow<span>.top</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#posts">文章</a></li>
+        <li><a href="../../index.html#about">关于</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="切换深色 / 浅色模式" title="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <article class="container article">
+      <header class="article-header">
+        <div class="post-meta">
+          <time datetime="2026-07-18">2026-07-18</time>
+          <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">CSS</span></span>
+          <span>阅读约 10 分钟</span>
+        </div>
+        <h1>CSS 容器查询实战：告别媒体查询的组件级响应式</h1>
+        <p class="article-lead">容器查询让组件真正「自成一体」，不再依赖视口宽度。本文用三个实际组件演示 @container 的写法、cqw 单位与老浏览器的降级方案。</p>
+      </header>
+
+      <div class="article-body">
+        <p>做组件库的同学一定遇到过这个场景：同一张卡片，放在主内容区里舒展大气，一丢进侧边栏就挤成一团。你用媒体查询写了三档响应式，结果组件换个地方放就全乱套——因为<strong>媒体查询只能看见视口，看不见组件所处的容器</strong>。</p>
+        <p>组件的响应式理应由容器决定，而不是由屏幕决定。这就是容器查询（Container Queries）要解决的问题。2023 年起它已在所有主流浏览器落地，如今是我在组件库里默认使用的方案。</p>
+
+        <h2>20 秒上手</h2>
+        <p>总共就两步：先在<strong>父元素</strong>上声明容器，再按容器尺寸写样式。</p>
+        <pre><code>/* 第一步：声明容器 */
+.card-wrap {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* 第二步：按容器宽度写样式 */
+@container card (min-width: 480px) {
+  .card { display: flex; gap: 16px; }
+  .card img { width: 160px; }
+}</code></pre>
+        <p><code>container-name</code> 可以省略，省略后 <code>@container (min-width: 480px)</code> 会匹配最近的容器祖先。</p>
+
+        <h2>实战一：文章卡片的三段式布局</h2>
+        <p>本站的首页文章卡片就是典型例子：窄容器纵向排列，宽容器图文横排，再宽一点摘要显示两行。三个断点全部基于卡片自身宽度：</p>
+        <pre><code>.post-wrap { container-type: inline-size; }
+
+@container (max-width: 419px) {
+  .post-card img { width: 100%; aspect-ratio: 16/9; }
+}
+
+@container (min-width: 420px) {
+  .post-card { display: grid; grid-template-columns: 120px 1fr; }
+}
+
+@container (min-width: 640px) {
+  .post-card { grid-template-columns: 200px 1fr; }
+  .post-card .excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}</code></pre>
+        <p>把这张卡片放进主栏、侧栏还是弹窗，布局都由容器说了算，组件从此可以放心到处搬。</p>
+
+        <h2>实战二：表单标签自适应宽度</h2>
+        <p>后台系统里表单经常被拖来拖去。用容器查询让 label 在窄容器里换到输入框上方：</p>
+        <pre><code>.field-wrap { container-type: inline-size; }
+
+.field { display: flex; align-items: center; gap: 12px; }
+.field label { flex: 0 0 96px; text-align: right; }
+
+@container (max-width: 480px) {
+  .field { flex-direction: column; align-items: stretch; }
+  .field label { text-align: left; }
+}</code></pre>
+
+        <h2>实战三：cqw，容器里的「rem」</h2>
+        <p>容器查询单位常被忽略：<code>cqw</code> / <code>cqi</code> 是容器宽度的 1%，<code>cqh</code> / <code>cqb</code> 对应高度。组件标题想随容器等比缩放，再也不用 JS：</p>
+        <pre><code>.widget h3 {
+  /* 标题始终约为容器宽度的 6%，且被夹在 16px ~ 28px 之间 */
+  font-size: clamp(16px, 6cqi, 28px);
+}</code></pre>
+
+        <h2>老浏览器的降级方案</h2>
+        <pre><code>.card { display: block; }
+
+@supports (container-type: inline-size) {
+  .card-wrap { container-type: inline-size; }
+  @container (min-width: 480px) {
+    .card { display: flex; }
+  }
+}</code></pre>
+        <p>思路是「先写一个能用的默认布局，再用 <code>@supports</code> 渐进增强」。Safari 16 之前的份额如今已经很少，多数项目甚至可以不做降级。</p>
+
+        <h2>三个容易踩的坑</h2>
+        <ol>
+          <li><strong>容器不能查询自己</strong>。<code>@container</code> 里的样式要写在容器的<strong>子元素</strong>上，写在声明容器的那一层是无效的；</li>
+          <li><code>container-type: inline-size</code> 会应用布局、样式和行内尺寸的<strong>包含（containment）</strong>，同时建立新的包含块——子元素的 <code>position: fixed</code> 会改为相对容器定位，弹层组件要留意；</li>
+          <li>容器查询查的是<strong>尺寸</strong>，目前也支持 <code>style()</code> 查询（如根据容器颜色变量切换样式），但浏览器支持仍在推进中，生产环境慎用。</li>
+        </ol>
+
+        <h2>写在最后</h2>
+        <p>媒体查询负责「页面级」布局，容器查询负责「组件级」布局，两者配合才是完整的响应式体系。把组件的断点还给组件本身，你会发现 UI 代码突然清爽了很多。</p>
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-tip">感谢阅读！如果这篇文章帮到了你，欢迎 <a href="https://rnadow.top/feed.xml">通过 RSS 订阅</a> 本站，或在 <a href="https://github.com/rnadow">GitHub</a> 上找我。</div>
+        <nav class="post-nav" aria-label="上一篇与下一篇">
+          <a class="post-nav-item" href="../2026-h1-reading-list/">
+            <span class="nav-label">← 上一篇 · 更早</span>
+            <span class="nav-title">我的 2026 上半年读书清单</span>
+          </a>
+          <a class="post-nav-item next" href="../deploy-blog-on-cloudflare-pages/">
+            <span class="nav-label">下一篇 · 更新 →</span>
+            <span class="nav-title">用 Cloudflare Pages 五分钟部署你的个人博客</span>
+          </a>
+        </nav>
+        <a class="back-home" href="../../index.html#posts">← 返回文章列表</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> rnadow · <a href="https://rnadow.top">rnadow.top</a> · 保留所有权利</p>
+      <p>由热爱驱动 · 手写 HTML &amp; CSS · <a href="https://rnadow.top/feed.xml">RSS 订阅</a></p>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+</body>
+</html>
