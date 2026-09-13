@@ -1,564 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-theme="light">
 <head>
-<title>Home</title>
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
-<link href="css/component.css" rel="stylesheet" type="text/css"  />
-<!-- Custom Theme files -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Scootio Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola Welcome" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--web-fonts-->
-<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
-<!--js-->
-<script src="js/jquery-1.11.1.min.js"></script> 
-<script src="js/modernizr.custom.js"></script>
-<link href="css/swipebox.css" rel='stylesheet' type='text/css' />
-<!--//js-->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
-<!--/script-->
-<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
-					event.preventDefault();
-					$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
-				});
-			});
-</script>
-<script src="js/jquery.swipebox.min.js"></script> 
-					<script type="text/javascript">
-						jQuery(function($) {
-							$(".work-grid-middle a").swipebox();
-						});
-					</script>
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rnadow 的小站 · rnadow.top</title>
+  <meta name="description" content="rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。">
+  <meta property="og:title" content="rnadow 的小站">
+  <meta property="og:description" content="rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。">
+  <meta property="og:url" content="https://rnadow.top">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%235b5ef4'/%3E%3Ctext x='50' y='71' font-size='56' font-weight='700' text-anchor='middle' fill='white' font-family='Arial'%3Er%3C/text%3E%3C/svg%3E">
+  <script>
+    // 提前应用主题，避免页面加载时闪烁
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
-  <!--start-home-->
- <body class="cbp-spmenu-push">
-       <!--top-header-->
-		<!--bottom-->
-		  <section class="button">
-					<button id="showLeftPush"><img src="images/menu-icon.png" alt=""></button>
-		   </section>
-		   	<!-- start-search-->
-			  <div class="search">
-			   <div id="sb-search" class="sb-search">
-				  <form>
-					 <input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
-					 <input class="sb-search-submit" type="submit" value="">
-					 <span class="sb-icon-search"> </span>
-				  </form>
-			    </div>
-			   </div>
-			 <!--search-scripts-->
-			 <script src="js/classie.js"></script>
-			 <script src="js/uisearch.js"></script>
-			   <script>
-				 new UISearch( document.getElementById( 'sb-search' ) );
-			   </script>
-				<!--//search-scripts-->
+<body>
 
-			<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-			<h3>Menu</h3>
-				<a class="active scroll" href="#house">Home</a>
-				<a class="scroll" href="#about">About</a>
-				<a class="scroll" href="#service">Services</a>
-				<a class="scroll" href="#team">Team</a>
-				<a class="scroll" href="#news">News</a>
-			    <a class="scroll" href="#demo">Demo</a>
-				<a class="scroll" href="#test">Testimonials</a>
-				<a class="scroll" href="#gallery">Gallery</a>
-				<a class="scroll" href="#contact">Contact</a>
-				<ul class=" side-icons">
-							<li><a class="fb" href="#"></a></li>
-							<li><a class="twitt" href="#"></a></li>
-							<li><a class="goog" href="#"></a></li>
-							<li><a class="drib" href="#"></a></li>
-					   </ul>
-		  </nav>
-	      <div class="banner" id="house">
-		       <div class="container">
-						<div class="callbacks_container">
-						<ul class="rslides callbacks callbacks1" id="slider4">
-							<li class="callbacks1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 500ms ease-in-out;">
-								<div class="banner-info">
-								<h3>The New Vespa Trade it</h3>
-							    <a href="#" class="con"><i class="glyphicon glyphicon-cog"></i>Configure</a>
-								</div>
-							</li>
-							<li class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
-								<div class="banner-info">
-								   <h3>The New Scootio</h3>
-								 <a href="#" class="con"><i class="glyphicon glyphicon-cog"></i>Configure</a>
-								</div>
-							</li>
-							<li class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
-								<div class="banner-info">
-								  <h3>The New Vespa Trade it</h3>
-								  <a href="#" class="con"><i class="glyphicon glyphicon-cog"></i>Configure</a>
-								</div>	
-							</li>
-							<li class="callbacks1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 500ms ease-in-out;">
-								<div class="banner-info">
-								 <h3>The New Scootio</h3>
-								 <a href="#" class="con"><i class="glyphicon glyphicon-cog"></i>Configure</a>
-								</div>
-							</li>
-						</ul>
-						</div>
-						<!--banner-Slider-->
-						<script src="js/responsiveslides.min.js"></script>
-						 <script>
-						// You can also use "$(window).load(function() {"
-						$(function () {
-						  // Slideshow 4
-						  $("#slider4").responsiveSlides({
-						auto: true,
-						pager: true,
-						nav:false,
-						speed: 500,
-						namespace: "callbacks",
-						before: function () {
-						  $('.events').append("<li>before event fired.</li>");
-						},
-						after: function () {
-						  $('.events').append("<li>after event fired.</li>");
-						}
-						  });
+  <header class="site-header" id="site-header">
+    <nav class="container">
+      <a class="logo" href="#top">rnadow<span>.top</span></a>
+      <ul class="nav-links">
+        <li><a href="#posts">文章</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="切换深色 / 浅色模式" title="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </nav>
+  </header>
 
-						});
-						  </script>
-				</div>
+  <main id="top">
 
+    <!-- 首屏：身份信息 -->
+    <section class="hero container">
+      <div class="avatar-wrap">
+        <div class="avatar" aria-hidden="true">r</div>
+        <span class="status-dot" title="在线"></span>
+      </div>
+      <h1>你好，我是 <span class="accent-text">rnadow</span> 👋</h1>
+      <p class="tagline">白天写代码，晚上折腾服务器。这里记录我的<strong>技术笔记</strong>、踩坑经验与生活随想。</p>
+      <div class="hero-badges">
+        <span class="badge badge-domain mono">🌐 rnadow.top</span>
+        <span class="badge">📝 <span id="post-count">6</span> 篇文章</span>
+        <span class="badge">🚀 运行 <span id="run-days">—</span> 天</span>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/rnadow" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="mailto:i@rnadow.top" aria-label="发送邮件" title="i@rnadow.top">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a href="https://rnadow.top/feed.xml" aria-label="RSS 订阅" title="RSS 订阅">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83C19.56 11.41 12.59 4.44 4 4.44zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+        </a>
+      </div>
+    </section>
 
-		 </div>
-		<script>
-			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-				showLeftPush = document.getElementById( 'showLeftPush' ),
-				showRightPush = document.getElementById( 'showRightPush' ),
-				body = document.body;
+    <!-- 文章列表 -->
+    <section id="posts" class="container section">
+      <div class="section-head">
+        <h2>最新文章</h2>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search" type="search" placeholder="搜索文章…" autocomplete="off">
+        </div>
+      </div>
 
-			showLeftPush.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( body, 'cbp-spmenu-push-toright' );
-				classie.toggle( menuLeft, 'cbp-spmenu-open' );
-				disableOther( 'showLeftPush' );
-			};
+      <div class="tag-cloud" id="tag-cloud" aria-label="按标签筛选">
+        <button class="tag active" data-tag="全部">全部</button>
+        <button class="tag" data-tag="教程">教程</button>
+        <button class="tag" data-tag="前端">前端</button>
+        <button class="tag" data-tag="CSS">CSS</button>
+        <button class="tag" data-tag="JavaScript">JavaScript</button>
+        <button class="tag" data-tag="运维">运维</button>
+        <button class="tag" data-tag="NAS">NAS</button>
+        <button class="tag" data-tag="生活">生活</button>
+        <button class="tag" data-tag="随笔">随笔</button>
+      </div>
 
-			function disableOther( button ) {
-				if( button !== 'showLeftPush' ) {
-					classie.toggle( showLeftPush, 'disabled' );
-				}
-				if( button !== 'showRightPush' ) {
-					classie.toggle( showRightPush, 'disabled' );
-				}
-			}
-		</script>
-        <div class="copyrights">Collect from <a href="http://www.baisheng999.com/" >企业网站模板</a></div>
-  <!--start-about-->
-     <div class="about-section" id="about">
-	    <div class="container">
-		       <h3 class="tittle">About</h3>
-		        <div class="about-top">
-				  <div class="col-md-6 about-text">
-				   <h2>Welcome to Our New Scootio</h2>
-				  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since,Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-				  <p>Dolor amet At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia anim</p>
-				   <a href="#" class="con two"><i class="glyphicon glyphicon-menu-right"></i>Read More</a>
-		    </div>
-			<div class="col-md-6 about-pic">
-		            <img src="images/ab.jpg" alt=""/>
-		    </div>
-				<div class="clearfix"> </div>		
-		    </div>
-		</div>
-	 </div>
-  <!--//about-->
-  <!--start-services-->
-     <div class="service-section" id="service">
-	    <div class="container">
-		  <h3 class="tittle">Service</h3>
-		    <div class="service-bottom">
-				<div class="col-md-6 about-left">
-					<div class="srv-one">
-						<div class="srv-left">
-							<h4>Pellentesque mollis malesuada</h4>
-							<p>Nulla et finibus libero. Suspendisse vitae ex facilisis, ultricies est sed, porta ante. Vivamus tristique luctus lorem, eget dignissim lacus sodales tristique.</p>
-						</div>
-						<div class="srv-right">
-							<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="srv-two">
-						<div class="srv-left">
-							<h4>Pellentesque mollis malesuada</h4>
-							<p>Nulla et finibus libero. Suspendisse vitae ex facilisis, ultricies est sed, porta ante. Vivamus tristique luctus lorem, eget dignissim lacus sodales tristique.</p>
-						</div>
-						<div class="srv-right">
-							<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="col-md-6 about-left">
-					<div class="srv-one">
-						<div class="ab-left">
-							<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
-						</div>
-						<div class="ab-right">
-							<h4>Pellentesque mollis malesuada</h4>
-							<p>Nulla et finibus libero. Suspendisse vitae ex facilisis, ultricies est sed, porta ante. Vivamus tristique luctus lorem, eget dignissim lacus sodales tristique.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="srv-two">
-						<div class="ab-left">
-							<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-						</div>
-						<div class="ab-right">
-							<h4>Pellentesque mollis malesuada</h4>
-							<p>Nulla et finibus libero. Suspendisse vitae ex facilisis, ultricies est sed, porta ante. Vivamus tristique luctus lorem, eget dignissim lacus sodales tristique.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
+      <div class="post-list" id="post-list">
 
-		</div>
-	 </div>
-  <!--latest-models-->
-		  <div class="top-places">
-		     <div class="container">
-			     <h3 class="tittle">Latest Models</h3>
-			    <div class="tip-main">
-			      <div class="col-md-4 top-grid">
-					 <img src="images/top-p.jpg" alt="image"/>
-					 <h4>Model 997</h4>
-					 <p>Praesent vestibulum aenean nonummy endrerit mauris. Cum sociis natoque Magnis  nonummy endrerit dis parturient montes. </p>
-					 <ul class="top-icons">
-							<li><a class="fb" href="#"></a></li>
-							<li><a class="twitt" href="#"></a></li>
-							<li><a class="goog" href="#"></a></li>
-							<li><a class="drib" href="#"></a></li>
-					   </ul>
-				  </div>		
-				    <div class="col-md-4 top-grid">
-					     <img src="images/top-p1.jpg" alt="image"/>
-					 	 <h4>Model 117</h4>
-						  <p>Praesent vestibulum aenean nonummy endrerit mauris. Cum sociis natoque Magnis  nonummy endrerit dis parturient montes. </p>
-						  <ul class="top-icons">
-							<li><a class="fb" href="#"></a></li>
-							<li><a class="twitt" href="#"></a></li>
-							<li><a class="goog" href="#"></a></li>
-							<li><a class="drib" href="#"></a></li>
-					   </ul>
-				  </div>	
-				   <div class="col-md-4 top-grid">
-					    <img src="images/top-p2.jpg" alt="image"/>
-					 	<h4>Model V30</h4>
-						<p>Praesent vestibulum aenean nonummy endrerit mauris. Cum sociis natoque Magnis  nonummy endrerit dis parturient montes. </p>
-						<ul class="top-icons">
-							<li><a class="fb" href="#"></a></li>
-							<li><a class="twitt" href="#"></a></li>
-							<li><a class="goog" href="#"></a></li>
-							<li><a class="drib" href="#"></a></li>
-					   </ul>
+        <article class="post-card" data-tags="教程 运维">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-08-30">2026-08-30</time>
+              <span class="tags-mini"><span class="mini-tag">教程</span><span class="mini-tag">运维</span></span>
+            </div>
+            <h3 class="post-title">用 Cloudflare Pages 五分钟部署你的个人博客</h3>
+            <p class="post-excerpt">从域名解析、构建配置到 HTTPS 证书，手把手把博客搬上 Cloudflare 的全球边缘网络，顺便聊聊回源与缓存的那些坑。</p>
+            <span class="read-time">阅读约 8 分钟</span>
+          </a>
+        </article>
 
-				  </div>	
-					<div class="clearfix"> </div>				
-				</div>
-			</div>
-	     </div>
+        <article class="post-card" data-tags="前端 CSS">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-07-18">2026-07-18</time>
+              <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">CSS</span></span>
+            </div>
+            <h3 class="post-title">CSS 容器查询实战：告别媒体查询的组件级响应式</h3>
+            <p class="post-excerpt">容器查询让组件真正"自成一体"，不再依赖视口宽度。本文用三个实际组件演示 @container 的写法，以及老浏览器的降级方案。</p>
+            <span class="read-time">阅读约 10 分钟</span>
+          </a>
+        </article>
 
-  <!--//about-->
-  <!--team start here-->
- <div class="team" id='team'>
-	  	<div class="container wrapper">
-	  		<div class="team-top">
-	  			<h3 class="tittle">Our Team</h3>
-	  		</div>
-	  		<div class="team-bottom">
-	  		<div class="friend">
-	  			<div class="col-md-4 friend-img"><img src="images/t1.jpg" class="img-responsive" alt=""/></div>
-	  			<div class="col-md-8 friend-desc">
-	  				<h3><a href="#">Scarlet Hara</a></h3>
-	  				<h4>Employer</h4>
-	  				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,</p>
-	  			</div>
-	  		    <div class="clearfix"> </div>
-	  		</div>
-	  		<div class="friend">
-	  		   <div class="col-md-8 friend-desc1">
-	  				<h3><a href="#">Jeff Bridges</a></h3>
-	  				<h4>Partner</h4>
-	  				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,</p>
-	  			</div>
-	  			<div class="col-md-4 friend-img1"><img src="images/t2.jpg" class="img-responsive" alt=""/></div>
-	  		    <div class="clearfix"> </div>
-	  		</div>
-	  		<div class="friend">
-	  			<div class="col-md-4 friend-img"><img src="images/t3.jpg" class="img-responsive" alt=""/></div>
-	  			<div class="col-md-8 friend-desc">
-	  				<h3><a href="#">Diana Ross</a></h3>
-	  				<h4>Director</h4>
-	  				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,</p>
-	  			</div>
-	  		    <div class="clearfix"> </div>
-	  		</div>
-	  		<div class="friend">
-	  		   <div class="col-md-8 friend-desc1">
-	  				<h3><a href="#">Jeff Bridges</a></h3>
-	  				<h4>Partner</h4>
-	  				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam,</p>
-	  			</div>
-	  			<div class="col-md-4 friend-img1"><img src="images/t4.jpg" class="img-responsive" alt=""/></div>
-	  		    <div class="clearfix"> </div>
-	  		</div>
-	  	</div>
-	 </div>
-</div>
-	<!--team end here-->
-	<!--news-starts-->
-	<div class="news" id="news">
-		<div class="container">
-		  <h3 class="tittle">Our News</h3>
-			<div class="news-bottom">
-				<div class="news-one">
-					<div class="col-md-6 news-left">
-						<a href="#"><img src="images/n1.jpg" alt="" /></a>
-					</div>	
-					<div class="col-md-6 news-right"> 
-					<a href="#"><h4>Pellentesque mollis malesuada</h4></a>
-						<h5>30.08.2015</h5>
-						<p class="one">Duis bibendum pellentesque nisi eget volutpat. Nunc rhoncus ultrices lectus.Aliquam eu dui quis orci ultrices eleifend ut non massa. Duis commodo, ante in vulputate iaculis, libero ex fringilla dolor id laoreet augue. Maecenas dui diam, pellentesque et.</p>	
-					</div>	
-					<div class="clearfix"> </div>	
-				</div>
-				<div class="news-one">
-					<div class="col-md-6 news-right"> 
-						<a href="#"><h4>Pellentesque mollis malesuada</h4></a>
-						<h5>12.09.2015</h5>
-						<p class="one">Duis bibendum pellentesque nisi eget volutpat. Nunc rhoncus ultrices lectus.Aliquam eu dui quis orci ultrices eleifend ut non massa. Duis commodo, ante in vulputate iaculis, libero ex fringilla dolor id laoreet augue. Maecenas dui diam, pellentesque et.</p>	
-					</div>	
-					<div class="col-md-6 news-left">
-						<a href="#"><img src="images/n2.jpg" alt="" /></a>
-					</div>						
-					<div class="clearfix"> </div>	
-				</div>		
-			</div>			
-		</div>	
-	</div>	
-	<!--news-end-->
+        <article class="post-card" data-tags="生活">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-06-02">2026-06-02</time>
+              <span class="tags-mini"><span class="mini-tag">生活</span></span>
+            </div>
+            <h3 class="post-title">我的 2026 上半年读书清单</h3>
+            <p class="post-excerpt">半年读完 9 本书，从《置身事内》到《设计数据密集型应用》。挑几本印象最深的聊聊，附上我的碎片化阅读方法。</p>
+            <span class="read-time">阅读约 6 分钟</span>
+          </a>
+        </article>
 
-	<!--test-demo-->
-	  <div class="test-demo" id="demo">	
-		    <div class="container">
-				<h3 class="tittle">Test Demo</h3>
-			  <div class="demo-top">
-			  	   <div class="col-md-4 demo-text">
-				      <h4> VESPA 946</h4>
-					   <div class="pre-top">
-							 <div class="item-text">
-									<span class="item_price">Finance Free</span>
-								    <h6>$129</h6>
-									  <div class="clearfix"> </div>
-						    </div>
-							<div class="item-text">
-									<span class="item_price">Option to Purchase Free</span>
-								    <h6>$249</h6>
-									  <div class="clearfix"> </div>
-						    </div>
-							<div class="item-text">
-									<span class="item_price">Total Amount Payable</span>
-								    <h6> $9,879</h6>
-									  <div class="clearfix"> </div>
-						    </div>
-							<div class="item-text">
-									<span class="item_price">Duration</span>
-								    <h6>48 months</h6>
-									  <div class="clearfix"> </div>
-						    </div>
-					  </div>
-					   <a href="#" class="con"><i class="glyphicon glyphicon-cog"></i>Configure</a>
+        <article class="post-card" data-tags="运维 NAS">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-05-11">2026-05-11</time>
+              <span class="tags-mini"><span class="mini-tag">运维</span><span class="mini-tag">NAS</span></span>
+            </div>
+            <h3 class="post-title">从零搭建家庭 NAS：硬件选型与避坑指南</h3>
+            <p class="post-excerpt">蜗牛星际还是成品群晖？硬盘怎么选才不踩雷？这篇文章完整记录我组装家用 NAS 的过程，以及三个月使用后的真实感受。</p>
+            <span class="read-time">阅读约 12 分钟</span>
+          </a>
+        </article>
 
-				      
-				   </div>
-			       <div class="col-md-8 demo-img">
-				   <img src="images/demo.jpg" alt=""/>
-				    </div>
-					<div class="clearfix"> </div>
-			  </div>
-			</div>
-	   </div>
-	<!--//test-demo-->
-		<!--//testimonials-->
-		  <div class="testimonials" id="test">	
-		       <div class="container">
-			   	<h3 class="tittle">Testimonials</h3>
-				<div class="callbacks_container">
-                    <ul class="rslides" id="slider3">
-                     <li>
-		                 <div class="testi-text">
-								<div class="testi-img">
-									<img src="images/t1.jpg" alt=""/>
-								</div>
-								<h4>David</h4>
-								<p><span> </span>Duis vitae feugiat lorem. Mauris eget ipsum sapien. Praesent euismod nec risus id tempor In sit amet sapien eros. Integer in tincidunt velit. Ut in tincidunt</p>								
-						  </div>
-						  </li>
-						  <li>
-							  <div class="testi-text">
-									<div class="testi-img">
-										<img src="images/t2.jpg" alt=""/>
-									</div>
-									<h4>sona</h4>
-									<p><span> </span>Duis vitae feugiat lorem. Mauris eget ipsum sapien. Praesent euismod nec risus id tempor In sit amet sapien eros. Integer in tincidunt velit. Ut in tincidunt</p>								
-							</div>
-						  </li>
-					</ul>
-					 </div>
-			   </div>
-		   </div>
-		   <script src="js/responsiveslides.min.js"></script>
-						 <script>
-						// You can also use "$(window).load(function() {"
-						$(function () {
-						  // Slideshow 3
-						  $("#slider3").responsiveSlides({
-						auto: true,
-						pager:false,
-						nav: true,
-						speed: 500,
-						namespace: "callbacks",
-						before: function () {
-						  $('.events').append("<li>before event fired.</li>");
-						},
-						after: function () {
-						  $('.events').append("<li>after event fired.</li>");
-						}
-						  });
+        <article class="post-card" data-tags="前端 JavaScript">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-04-08">2026-04-08</time>
+              <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">JavaScript</span></span>
+            </div>
+            <h3 class="post-title">那些容易被忽略的 JavaScript 内存泄漏场景</h3>
+            <p class="post-excerpt">闭包、遗留的定时器、游离的 DOM 引用……这些问题在日常开发里很难察觉。用 Chrome DevTools 的 Memory 面板逐个揪出它们。</p>
+            <span class="read-time">阅读约 9 分钟</span>
+          </a>
+        </article>
 
-						});
-				 </script>
-<!--start-gallery-->
-<div class="work" id="gallery">
-		<!-- container -->
-		<div class="container">
-				<h3 class="tittle">Gallery</h3>
-			<div class="work-grids">
-				<div class="work-grids-top">
-					<div class="col-md-4 work-grid-left">
-						<h5>New Scootio</h5>
-						<p>non suscipit leo fringilla non suscipit leo fringilla molestie</p>
-						<a href="#">946</a>
-					</div>
-					<div class="col-md-4 work-grid-middle">
-						<a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g1.jpg" alt=""/></a>
-					</div>
-					<div class="col-md-4 work-grid-left">
-						<h5>New Scootio</h5>
-						<p>non suscipit leo fringilla non suscipit leo fringilla molestie</p>
-						<a href="#">V30</a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="work-grids-top">
-					<div class="col-md-4 work-grid-middle">
-					<a class="example-image-link" href="images/g3.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g3.jpg" alt=""/></a>
-					</div>
-					<div class="col-md-4 work-grid-left">
-						<h5>New Scootio</h5>
-						<p>non suscipit leo fringilla non suscipit leo fringilla molestie</p>
-						<a href="#">C20</a>
-					</div>
-					<div class="col-md-4 work-grid-middle">
-						<a class="example-image-link" href="images/g4.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g4.jpg" alt=""/></a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="work-grids-top">
-					<div class="col-md-4 work-grid-left">
-						<h5>New Scootio</h5>
-						<p>non suscipit leo fringilla non suscipit leo fringilla molestie</p>
-						<a href="#">V2</a>
-					</div>
-					<div class="col-md-4 work-grid-middle">
-							<a class="example-image-link" href="images/g2.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g2.jpg" alt=""/></a>
-					</div>
-					<div class="col-md-4 work-grid-left">
-						<h5>New Scootio</h5>
-						<p>non suscipit leo fringilla non suscipit leo fringilla molestie</p>
-						<a href="#">C4</a>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-		</div>	
-		<!-- //container -->
-	</div>
-<!--contact-->
-   <div class="contact" id="contact">
-	 <div class="container">
-		       <h3 class="tittle">Contact</h3>
-			<div class="contact-form">
-					<div class="col-md-6 contact-grid">
-					<form>
-						<p class="your-para">Your Name:</p>
-						<input type="text" value="" onFocus="this.value='';" onBlur="if (this.value == '') {this.value ='';}">
-						<p class="your-para">Your Mail:</p>
-						<input type="text" value="" onFocus="this.value='';" onBlur="if (this.value == '') {this.value ='';}">
-						<p class="your-para">Your Message:</p>
-						<textarea cols="77" rows="6" value=" " onFocus="this.value='';" onBlur="if (this.value == '') {this.value = '';}"></textarea>
-						<div class="send">
-							<input type="submit" value="Send" >
-						</div>
-					</form>
-				</div>
-				<div class="col-md-6 contact-in">
-					<h5> Contact Info</h5>
-					<p class="para1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.  </p>
-					<div class="more-address"> 
-						<div class="address-more">
-						  <p class="location"><i class="glyphicon glyphicon-map-marker"></i>16A, Honey Street</p>
-					      <p class="phone"><i class="glyphicon glyphicon-phone"></i> 655 7758 2068 54892</p>
-					      <p class="mail"><i class="glyphicon glyphicon-envelope"></i><a href="mailto:info@example.com">mail@example.com</a></p>
+        <article class="post-card" data-tags="随笔">
+          <a href="#" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-03-01">2026-03-01</time>
+              <span class="tags-mini"><span class="mini-tag">随笔</span></span>
+            </div>
+            <h3 class="post-title">写在博客开通的第一天</h3>
+            <p class="post-excerpt">折腾了三个晚上，这个小站终于上线了。聊聊我为什么想写博客，以及 rnadow.top 之后想做成什么样子。</p>
+            <span class="read-time">阅读约 4 分钟</span>
+          </a>
+        </article>
 
-						</div>
-				      </div>
-				</div>
-				<div class="clearfix"> </div>
-			   </div>
-	    </div>
+      </div>
+
+      <p class="empty" id="empty-state" hidden>没有找到相关文章，换个关键词或标签试试？</p>
+    </section>
+
+    <!-- 关于 -->
+    <section id="about" class="container section">
+      <h2>关于我</h2>
+      <div class="about-grid">
+        <div class="about-card about-text">
+          <p>我是 <strong>rnadow</strong>，一名关注 Web 开发、自托管与效率工具的独立开发者。白天在公司写业务代码，晚上在家折腾服务器和开源项目。</p>
+          <p>我相信"写下来"的力量——把踩过的坑、想通的道理整理成文章，既是对自己的复盘，也希望能帮到搜索而来的你。如果文章对你有帮助，欢迎通过 RSS 订阅本站。</p>
+          <a class="btn" href="mailto:i@rnadow.top">联系我 → i@rnadow.top</a>
+        </div>
+        <div class="about-card about-side">
+          <h3>常用技术</h3>
+          <div class="skills">
+            <span class="skill">TypeScript</span>
+            <span class="skill">Vue</span>
+            <span class="skill">React</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Docker</span>
+            <span class="skill">Linux</span>
+            <span class="skill">Python</span>
+          </div>
+          <h3>本站信息</h3>
+          <ul class="site-info">
+            <li><span>域名</span><a class="mono" href="https://rnadow.top">rnadow.top</a></li>
+            <li><span>开通时间</span><span>2026-03-01</span></li>
+            <li><span>部署方式</span><span>静态站点 · CDN 分发</span></li>
+            <li><span>站点原则</span><span>无广告 · 无追踪</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> rnadow · <a href="https://rnadow.top">rnadow.top</a> · 保留所有权利</p>
+      <p>由热爱驱动 · 手写 HTML &amp; CSS · <a href="https://rnadow.top/feed.xml">RSS 订阅</a></p>
     </div>
+  </footer>
 
-	<!--/footer-->
-			<div class="copy">
-		              <p>Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.baisheng999.com/" target="_blank" title="网站模板库">网站模板库</a> - Collect from <a href="http://www.baisheng999.com/" title="网页模板" target="_blank">网页模板</a></p>
-		            </div>
-							<!--start-smoth-scrolling-->
-						<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
-		<a href="#house" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-
+  <script src="script.js"></script>
 </body>
 </html>
