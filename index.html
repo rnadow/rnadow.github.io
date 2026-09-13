@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rnadow 的小站 · rnadow.top</title>
+  <meta name="description" content="rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。">
+  <meta property="og:title" content="rnadow 的小站">
+  <meta property="og:description" content="rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。">
+  <meta property="og:url" content="https://rnadow.top">
+  <link rel="alternate" type="application/rss+xml" title="rnadow 的小站" href="https://rnadow.top/feed.xml">
+  <link rel="sitemap" type="application/xml" title="网站地图" href="https://rnadow.top/sitemap.xml">
+  <meta property="og:image" content="https://rnadow.top/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://rnadow.top/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23B4623D'/%3E%3Ctext x='50' y='71' font-size='56' font-weight='700' text-anchor='middle' fill='%23F6F1E7' font-family='Georgia'%3Er%3C/text%3E%3C/svg%3E">
+  <script>
+    // 提前应用主题，避免页面加载时闪烁
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header" id="site-header">
+    <nav class="container">
+      <a class="logo" href="#top">rnadow<span>.top</span></a>
+      <ul class="nav-links">
+        <li><a href="#posts">文章</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="切换深色 / 浅色模式" title="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- 首屏：身份信息 -->
+    <section class="hero container">
+      <div class="hero-copy">
+        <p class="eyebrow">✍️ rnadow<strong>.top</strong> · 一本慢慢写的博客</p>
+        <h1>你好，我是 rnadow。<br><em>慢慢写，好好生活。</em></h1>
+        <p class="tagline">白天写代码，晚上折腾服务器。这里记录我的<strong>技术笔记</strong>、踩坑经验与生活随想——以一个不慌不快的速度。</p>
+        <div class="hero-actions">
+          <a class="btn" href="#posts">看看最近的文章</a>
+          <a class="link-underline" href="#about">关于我</a>
+        </div>
+        <p class="hero-meta">
+          <span>📝 <span id="post-count">6</span> 篇文章</span>
+          <span>🚀 运行 <span id="run-days">—</span> 天</span>
+          <span>☕ 无广告 · 无追踪</span>
+        </p>
+        <div class="socials">
+          <a href="https://github.com/rnadow" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+          <a href="mailto:i@rnadow.top" aria-label="发送邮件" title="i@rnadow.top">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+          <a href="https://rnadow.top/feed.xml" aria-label="RSS 订阅" title="RSS 订阅">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83C19.56 11.41 12.59 4.44 4 4.44zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="arch">
+          <img src="https://picsum.photos/id/0/900/1200.jpg" alt="书桌一角的照片" loading="eager">
+        </div>
+        <div class="badge-circle" aria-hidden="true">写下来</div>
+        <p class="art-caption">书桌前，清晨七点 —— 文章写完，咖啡还热。</p>
+      </div>
+    </section>
+
+    <!-- 文章列表 -->
+    <section id="posts" class="container section">
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">01 · Recent Posts</p>
+          <h2>最新文章</h2>
+        </div>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search" type="search" placeholder="搜索文章…" autocomplete="off">
+        </div>
+      </div>
+
+      <p class="eyebrow tags-eyebrow">按标签浏览 · 或搜索</p>
+      <div class="tag-cloud" id="tag-cloud" aria-label="按标签筛选">
+        <button class="tag active" data-tag="全部">全部</button>
+        <button class="tag" data-tag="教程">教程</button>
+        <button class="tag" data-tag="前端">前端</button>
+        <button class="tag" data-tag="CSS">CSS</button>
+        <button class="tag" data-tag="JavaScript">JavaScript</button>
+        <button class="tag" data-tag="运维">运维</button>
+        <button class="tag" data-tag="NAS">NAS</button>
+        <button class="tag" data-tag="生活">生活</button>
+        <button class="tag" data-tag="随笔">随笔</button>
+      </div>
+
+      <div class="post-list" id="post-list">
+
+        <article class="post-card" data-tags="教程 运维">
+          <span class="post-num" aria-hidden="true">01</span>
+          <a href="posts/deploy-blog-on-cloudflare-pages/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-08-30">2026-08-30</time>
+              <span class="tags-mini"><span class="mini-tag">教程</span><span class="mini-tag">运维</span></span>
+            </div>
+            <h3 class="post-title">用 Cloudflare Pages 五分钟部署你的个人博客</h3>
+            <p class="post-excerpt">从域名解析、构建配置到 HTTPS 证书，手把手把博客搬上 Cloudflare 的全球边缘网络，顺便聊聊回源与缓存的那些坑。</p>
+            <span class="read-time">阅读约 8 分钟</span>
+          </a>
+        </article>
+
+        <article class="post-card" data-tags="前端 CSS">
+          <span class="post-num" aria-hidden="true">02</span>
+          <a href="posts/css-container-queries-in-practice/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-07-18">2026-07-18</time>
+              <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">CSS</span></span>
+            </div>
+            <h3 class="post-title">CSS 容器查询实战：告别媒体查询的组件级响应式</h3>
+            <p class="post-excerpt">容器查询让组件真正"自成一体"，不再依赖视口宽度。本文用三个实际组件演示 @container 的写法，以及老浏览器的降级方案。</p>
+            <span class="read-time">阅读约 10 分钟</span>
+          </a>
+        </article>
+
+        <article class="post-card" data-tags="生活">
+          <span class="post-num" aria-hidden="true">03</span>
+          <a href="posts/2026-h1-reading-list/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-06-02">2026-06-02</time>
+              <span class="tags-mini"><span class="mini-tag">生活</span></span>
+            </div>
+            <h3 class="post-title">我的 2026 上半年读书清单</h3>
+            <p class="post-excerpt">半年读完 9 本书，从《置身事内》到《设计数据密集型应用》。挑几本印象最深的聊聊，附上我的碎片化阅读方法。</p>
+            <span class="read-time">阅读约 6 分钟</span>
+          </a>
+        </article>
+
+        <article class="post-card" data-tags="运维 NAS">
+          <span class="post-num" aria-hidden="true">04</span>
+          <a href="posts/build-home-nas-guide/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-05-11">2026-05-11</time>
+              <span class="tags-mini"><span class="mini-tag">运维</span><span class="mini-tag">NAS</span></span>
+            </div>
+            <h3 class="post-title">从零搭建家庭 NAS：硬件选型与避坑指南</h3>
+            <p class="post-excerpt">蜗牛星际还是成品群晖？硬盘怎么选才不踩雷？这篇文章完整记录我组装家用 NAS 的过程，以及三个月使用后的真实感受。</p>
+            <span class="read-time">阅读约 12 分钟</span>
+          </a>
+        </article>
+
+        <article class="post-card" data-tags="前端 JavaScript">
+          <span class="post-num" aria-hidden="true">05</span>
+          <a href="posts/javascript-memory-leaks/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-04-08">2026-04-08</time>
+              <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">JavaScript</span></span>
+            </div>
+            <h3 class="post-title">那些容易被忽略的 JavaScript 内存泄漏场景</h3>
+            <p class="post-excerpt">闭包、遗留的定时器、游离的 DOM 引用……这些问题在日常开发里很难察觉。用 Chrome DevTools 的 Memory 面板逐个揪出它们。</p>
+            <span class="read-time">阅读约 9 分钟</span>
+          </a>
+        </article>
+
+        <article class="post-card" data-tags="随笔">
+          <span class="post-num" aria-hidden="true">06</span>
+          <a href="posts/hello-world-first-post/" class="post-link">
+            <div class="post-meta">
+              <time datetime="2026-03-01">2026-03-01</time>
+              <span class="tags-mini"><span class="mini-tag">随笔</span></span>
+            </div>
+            <h3 class="post-title">写在博客开通的第一天</h3>
+            <p class="post-excerpt">折腾了三个晚上，这个小站终于上线了。聊聊我为什么想写博客，以及 rnadow.top 之后想做成什么样子。</p>
+            <span class="read-time">阅读约 4 分钟</span>
+          </a>
+        </article>
+
+      </div>
+
+      <p class="empty" id="empty-state" hidden>没有找到相关文章，换个关键词或标签试试？</p>
+    </section>
+
+    <!-- 关于 -->
+    <section id="about" class="container section">
+      <div class="section-head">
+        <div class="section-title">
+          <p class="eyebrow">02 · About</p>
+          <h2>关于我</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-card about-text">
+          <p>我是 <strong>rnadow</strong>，一名关注 Web 开发、自托管与效率工具的独立开发者。白天在公司写业务代码，晚上在家折腾服务器和开源项目。</p>
+          <p>我相信"写下来"的力量——把踩过的坑、想通的道理整理成文章，既是对自己的复盘，也希望能帮到搜索而来的你。如果文章对你有帮助，欢迎通过 RSS 订阅本站。</p>
+          <a class="btn" href="mailto:i@rnadow.top">写信给我</a>
+        </div>
+        <div class="about-card about-side">
+          <h3>常用技术</h3>
+          <div class="skills">
+            <span class="skill">TypeScript</span>
+            <span class="skill">Vue</span>
+            <span class="skill">React</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Docker</span>
+            <span class="skill">Linux</span>
+            <span class="skill">Python</span>
+          </div>
+          <h3>本站信息</h3>
+          <ul class="site-info">
+            <li><span>域名</span><a href="https://rnadow.top">rnadow.top</a></li>
+            <li><span>开通时间</span><span>2026-03-01</span></li>
+            <li><span>部署方式</span><span>静态站点 · CDN 分发</span></li>
+            <li><span>站点原则</span><span>无广告 · 无追踪</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="foot-logo">rnadow<span>.top</span></p>
+      <p>© <span id="year">2026</span> rnadow · 保留所有权利 · 由热爱驱动</p>
+      <p><a href="https://rnadow.top/feed.xml">RSS 订阅</a> · 无广告 · 无追踪 · 手写 HTML &amp; CSS</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

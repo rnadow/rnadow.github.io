@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>社交预览图生成源 · 1280×640 · rnadow.top</title>
+  <!--
+    og-image.png 的生成源文件：浏览器打开本页（本地服务器），
+    将视口设为 1280×640 后截图，即可得到 og-image.png。
+    想换文案 / 配色，改下面内联样式后重新截图即可。
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Karla:ital,wght@0,300..700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1280px; height: 640px; overflow: hidden; }
+    body {
+      position: relative;
+      background: #F6F1E7;
+      color: #2C2820;
+      font-family: 'Karla', -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      display: flex;
+      align-items: center;
+      padding: 0 96px;
+    }
+
+    .wash {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 46% 62% at 88% 42%, rgba(216, 161, 146, 0.22), transparent 70%),
+        radial-gradient(ellipse 40% 55% at 6% 96%, rgba(228, 218, 197, 0.9), transparent 70%);
+    }
+    .dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(44, 40, 32, 0.08) 1.5px, transparent 1.5px);
+      background-size: 34px 34px;
+    }
+
+    .card { position: relative; display: flex; align-items: center; gap: 72px; width: 100%; }
+
+    .copy { flex: 1; }
+    .eyebrow {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9C5130;
+    }
+    h1 {
+      margin-top: 22px;
+      font-family: 'Fraunces', Georgia, 'Songti SC', 'SimSun', serif;
+      font-size: 74px;
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: #B4623D;
+    }
+    .sub {
+      margin-top: 22px;
+      font-size: 25px;
+      color: #5C564A;
+    }
+    .sub strong { color: #2C2820; font-weight: 600; }
+    .chips { display: flex; gap: 14px; margin-top: 34px; }
+    .chip {
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid #E4DAC5;
+      background: #FCF9F1;
+      color: #5C564A;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+    .chip strong { color: #9C5130; font-weight: 700; }
+
+    .art { position: relative; flex-shrink: 0; width: 320px; }
+    .arch {
+      width: 320px;
+      height: 430px;
+      border-radius: 999px 999px 14px 14px;
+      overflow: hidden;
+      border: 1px solid #E4DAC5;
+      background: #EFE8D8;
+      box-shadow: 0 24px 50px rgba(44, 40, 32, 0.16);
+    }
+    .arch img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .badge-circle {
+      position: absolute;
+      left: -46px;
+      bottom: 74px;
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: #FCF9F1;
+      border: 1px solid #E4DAC5;
+      box-shadow: 0 14px 30px rgba(44, 40, 32, 0.14);
+      display: grid;
+      place-items: center;
+      font-family: 'Fraunces', Georgia, 'SimSun', serif;
+      font-style: italic;
+      font-size: 25px;
+      color: #B4623D;
+      transform: rotate(-8deg);
+    }
+
+    .footer {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      bottom: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid #E4DAC5;
+      color: #5C564A;
+      font-size: 19px;
+    }
+    .footer .brand {
+      font-family: 'Fraunces', Georgia, 'SimSun', serif;
+      font-weight: 600;
+      color: #2C2820;
+    }
+    .footer .brand span { color: #B4623D; font-weight: 400; }
+  </style>
+</head>
+<body>
+  <div class="wash"></div>
+  <div class="dots"></div>
+
+  <div class="card">
+    <div class="copy">
+      <p class="eyebrow">rnadow.top · a slow blog</p>
+      <h1>慢慢写，<br><em>好好生活。</em></h1>
+      <p class="sub">你好，我是 <strong>rnadow</strong> —— 技术笔记 · 踩坑经验 · 生活随想</p>
+      <div class="chips">
+        <span class="chip">📝 <strong>6</strong> 篇文章</span>
+        <span class="chip">☕ 无广告 · 无追踪</span>
+        <span class="chip">📡 RSS 全文输出</span>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="arch"><img src="https://picsum.photos/id/0/900/1200.jpg" alt=""></div>
+      <div class="badge-circle">写下来</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="brand">rnadow<span>.top</span></span>
+    <span>© 2026 rnadow 的小站 · 部署于边缘网络</span>
+  </div>
+</body>
+</html>

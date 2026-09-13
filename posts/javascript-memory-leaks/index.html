@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>那些容易被忽略的 JavaScript 内存泄漏场景 · rnadow 的小站</title>
+  <meta name="description" content="闭包、遗留的定时器、游离的 DOM 引用……这些问题在日常开发里很难察觉。用 Chrome DevTools 的 Memory 面板逐个揪出它们。">
+  <link rel="canonical" href="https://rnadow.top/posts/javascript-memory-leaks/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="那些容易被忽略的 JavaScript 内存泄漏场景">
+  <meta property="og:description" content="闭包、遗留的定时器、游离的 DOM 引用……用 Chrome DevTools 的 Memory 面板逐个揪出它们。">
+  <meta property="og:url" content="https://rnadow.top/posts/javascript-memory-leaks/">
+  <meta property="article:published_time" content="2026-04-08">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23B4623D'/%3E%3Ctext x='50' y='71' font-size='56' font-weight='700' text-anchor='middle' fill='%23F6F1E7' font-family='Georgia'%3Er%3C/text%3E%3C/svg%3E">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <meta property="og:image" content="https://rnadow.top/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://rnadow.top/og-image.png">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <header class="site-header" id="site-header">
+    <nav class="container">
+      <a class="logo" href="../../index.html">rnadow<span>.top</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#posts">文章</a></li>
+        <li><a href="../../index.html#about">关于</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="切换深色 / 浅色模式" title="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <article class="container article">
+      <header class="article-header">
+        <div class="post-meta">
+          <time datetime="2026-04-08">2026-04-08</time>
+          <span class="tags-mini"><span class="mini-tag">前端</span><span class="mini-tag">JavaScript</span></span>
+          <span>阅读约 9 分钟</span>
+        </div>
+        <h1>那些容易被忽略的 JavaScript 内存泄漏场景</h1>
+        <p class="article-lead">闭包、遗留的定时器、游离的 DOM 引用……这些问题在日常开发里很难察觉。本文用 Chrome DevTools 的 Memory 面板逐个揪出它们。</p>
+      </header>
+
+      <div class="article-body">
+        <p>上周排查一个后台项目：开一下午标签页，风扇开始起飞，页面卡到点按钮都要等半秒。Performance 面板一看，JS 堆内存曲线一路上扬，典型的内存泄漏。借着这个案例，把日常开发里最容易遇到的五类泄漏场景整理成文。</p>
+
+        <h2>先弄懂 GC 怎么工作</h2>
+        <p>现代 JavaScript 引擎用<strong>可达性（reachability）</strong>判断垃圾：从根（全局对象、当前调用栈等）出发，顺着引用走，能走到的对象是活的，走不到的才可以回收。</p>
+        <blockquote><p>泄漏的本质：本该不可达的对象，仍然被某条引用链拽着。</p></blockquote>
+        <p>记住这句话，下面的所有场景都是它的变体。</p>
+
+        <h2>场景一：意外的全局变量</h2>
+        <pre><code>function handler(data) {
+  cache = { ...data }; // 忘写 let/const，隐式挂到 window
+}</code></pre>
+        <p>非严格模式下，漏声明的赋值会挂到全局对象上，页面不关它就永不释放。防御手段很成熟：开启 strict mode，再让 ESLint 的 <code>no-undef</code> 规则兜底。</p>
+
+        <h2>场景二：被遗忘的定时器与监听器</h2>
+        <p>SPA 的重灾区。组件销毁了，定时器还攥着闭包里的数据：</p>
+        <pre><code>useEffect(() =&gt; {
+  const id = setInterval(pollStatus, 3000);
+  return () =&gt; clearInterval(id); // 漏掉这行，pollStatus 引用的数据全部滞留
+}, []);</code></pre>
+        <p><code>addEventListener</code> 同理，尤其挂在 <code>window</code> / <code>document</code> 上的监听——组件树销毁并不会自动解绑它们。</p>
+        <p>推荐用 AbortSignal 一次性解绑，比逐个 remove 干净得多：</p>
+        <pre><code>const controller = new AbortController();
+window.addEventListener('resize', onResize, { signal: controller.signal });
+el.addEventListener('click', onClick, { signal: controller.signal });
+
+// 组件卸载时一行解绑全部
+controller.abort();</code></pre>
+
+        <h2>场景三：闭包顺手引用了大对象</h2>
+        <pre><code>function process(bigData) {
+  const header = bigData.header;   // 只需要 header
+  return () =&gt; render(header);     // 看似只留 header
+}</code></pre>
+        <p>看起来没问题，但如果写成 <code>return () =&gt; render(bigData.header)</code>，闭包捕获的是整个 <code>bigData</code>——几 MB 的原始数据就这样被一个回调拽着不放。原则：<strong>只把需要的字段提取出来，别让闭包「顺手」引用整个对象</strong>。</p>
+
+        <h2>场景四：游离的 DOM 引用</h2>
+        <pre><code>const submitBtn = document.querySelector('#submit');
+// 某次重渲染后
+document.querySelector('#form').innerHTML = '';
+// submitBtn 仍指向已从文档移除的节点，整个子树都无法回收</code></pre>
+        <p>表格行、列表项的场景最常见：JS 变量里缓存了节点引用，重渲染后这些节点成了「孤儿」。对策是控制变量生命周期（用完置 <code>null</code>）或尽量缩小引用的作用域。</p>
+
+        <h2>场景五：无上限的缓存</h2>
+        <p>拿 <code>Map</code> 当缓存、只进不出，是数据量上来后必然爆炸的写法。最简单的 LRU 用 <code>Map</code> 的插入序就能实现：</p>
+        <pre><code>const cache = new Map();
+const MAX = 200;
+
+function setCache(key, value) {
+  if (cache.has(key)) cache.delete(key); // 重新插入以刷新位置
+  cache.set(key, value);
+  if (cache.size &gt; MAX) {
+    const oldest = cache.keys().next().value;
+    cache.delete(oldest); // 淘汰最旧的
+  }
+}</code></pre>
+        <p>追求完备可以直接用现成的 lru-cache 库，或用 WeakMap 处理「以对象为键」的场景。</p>
+
+        <h2>怎么查：Memory 面板三板斧</h2>
+        <ol>
+          <li><strong>Performance Monitor 看趋势</strong>：先确认 JS heap size 是否「只涨不跌」，排除正常的 GC 锯齿；</li>
+          <li><strong>Heap Snapshot 对比</strong>：操作前拍一张、反复执行可疑操作后拍第二张，选择「Objects allocated between Snapshot 1 and 2」，按 Retained Size 排序；</li>
+          <li><strong>Retainers 链定位元凶</strong>：点开可疑对象，看下方是谁引用着它——十有八九是某个定时器回调、闭包上下文或被缓存的数组。</li>
+        </ol>
+        <p>补充一个直观工具：Allocation instrumentation on timeline，录制期间蓝色柱代表「分配了且尚未释放」的内存，操作复现时非常好用。</p>
+
+        <h2>写在最后</h2>
+        <p>泄漏不可怕，可怕的是没有发现泄漏的手段。把 Performance Monitor 挂到开发习惯里，长会话页面（后台、编辑器、聊天类）上线前跑一轮 snapshot 对比，就能拦住绝大多数问题。至于那个后台项目——解绑了一个被遗忘的 <code>setInterval</code>，内存曲线立刻变成了漂亮的锯齿波。</p>
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-tip">感谢阅读！如果这篇文章帮到了你，欢迎 <a href="https://rnadow.top/feed.xml">通过 RSS 订阅</a> 本站，或在 <a href="https://github.com/rnadow">GitHub</a> 上找我。</div>
+        <nav class="post-nav" aria-label="上一篇与下一篇">
+          <a class="post-nav-item" href="../hello-world-first-post/">
+            <span class="nav-label">← 上一篇 · 更早</span>
+            <span class="nav-title">写在博客开通的第一天</span>
+          </a>
+          <a class="post-nav-item next" href="../build-home-nas-guide/">
+            <span class="nav-label">下一篇 · 更新 →</span>
+            <span class="nav-title">从零搭建家庭 NAS：硬件选型与避坑指南</span>
+          </a>
+        </nav>
+        <a class="back-home" href="../../index.html#posts">← 返回文章列表</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year">2026</span> rnadow · <a href="https://rnadow.top">rnadow.top</a> · 保留所有权利</p>
+      <p>由热爱驱动 · 手写 HTML &amp; CSS · <a href="https://rnadow.top/feed.xml">RSS 订阅</a></p>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+</body>
+</html>
