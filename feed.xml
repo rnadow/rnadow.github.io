@@ -6,8 +6,16 @@
     <description>rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。</description>
     <language>zh-CN</language>
     <copyright>© 2026 rnadow · rnadow.top</copyright>
-    <lastBuildDate>Sun, 30 Aug 2026 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 00:00:00 +0800</lastBuildDate>
     <atom:link href="https://rnadow.top/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>开通 ChatGPT Plus 踩坑记：Bybit Card、免费试用拒付与 Go 升级路线</title>
+      <link>https://rnadow.top/posts/chatgpt-plus-bybit-card-lessons/</link>
+      <guid isPermaLink="true">https://rnadow.top/posts/chatgpt-plus-bybit-card-lessons/</guid>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 +0800</pubDate>
+      <description>记录使用 Bybit Card 开通 ChatGPT Plus 时遇到的免费试用拒付，以及先订阅 Go、再升级 Plus 的实际解决过程和账单地址注意事项。</description>
+    </item>
 
     <item>
       <title>用 Cloudflare Pages 五分钟部署你的个人博客</title>
@@ -29,7 +37,7 @@
       <title>我的 2026 上半年读书清单</title>
       <link>https://rnadow.top/posts/2026-h1-reading-list/</link>
       <guid isPermaLink="true">https://rnadow.top/posts/2026-h1-reading-list/</guid>
-      <pubDate>Sat, 02 Jun 2026 00:00:00 +0800</pubDate>
+      <pubDate>Tue, 02 Jun 2026 00:00:00 +0800</pubDate>
       <description>半年读完 9 本书，从《置身事内》到《设计数据密集型应用》。挑几本印象最深的聊聊，附上我的碎片化阅读方法。</description>
     </item>
 

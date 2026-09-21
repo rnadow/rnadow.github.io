@@ -22,6 +22,7 @@ rnadow-blog/
 ├── og.html               # 预览图生成源文件：本地打开 → 视口设为 1280×640 → 截图即可重新生成
 └── posts/                # 文章页，每篇文章一个目录（URL 干净）
     ├── deploy-blog-on-cloudflare-pages/index.html
+    ├── chatgpt-plus-bybit-card-lessons/index.html
     ├── css-container-queries-in-practice/index.html
     ├── 2026-h1-reading-list/index.html
     ├── build-home-nas-guide/index.html
