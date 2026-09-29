@@ -6,8 +6,16 @@
     <description>rnadow 的个人博客 —— 记录技术笔记、踩坑经验与生活随想。</description>
     <language>zh-CN</language>
     <copyright>© 2026 rnadow · rnadow.top</copyright>
-    <lastBuildDate>Mon, 21 Sep 2026 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 20:00:00 +0800</lastBuildDate>
     <atom:link href="https://rnadow.top/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>在 Windows 上构建 AirCard-iOS 26.4：配对、探针与多卡精准识别</title>
+      <link>https://rnadow.top/posts/aircard-ios-26-4-windows-build/</link>
+      <guid isPermaLink="true">https://rnadow.top/posts/aircard-ios-26-4-windows-build/</guid>
+      <pubDate>Tue, 29 Sep 2026 20:00:00 +0800</pubDate>
+      <description>记录 AirCard-iOS 26.4 实验版的 Windows 云端构建、配对文件导入、安全探针，以及在 10 张 Wallet 卡片中精准识别目标卡的完整过程。</description>
+    </item>
 
     <item>
       <title>开通 ChatGPT Plus 踩坑记：Bybit Card、免费试用拒付与 Go 升级路线</title>

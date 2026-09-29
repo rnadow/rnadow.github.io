@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在 Windows 上构建 AirCard-iOS 26.4：配对、探针与多卡精准识别 · rnadow 的小站</title>
+  <meta name="description" content="记录 AirCard-iOS 26.4 实验版的 Windows 云端构建、配对文件导入、安全探针，以及 10 张 Wallet 卡片中精准识别目标卡的完整过程。">
+  <link rel="canonical" href="https://rnadow.top/posts/aircard-ios-26-4-windows-build/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="在 Windows 上构建 AirCard-iOS 26.4：配对、探针与多卡精准识别">
+  <meta property="og:description" content="从 Windows 构建无签名 IPA，到导入 pairing file、验证 AirTraffic，再解决 10 张卡无法确认目标卡的问题。">
+  <meta property="og:url" content="https://rnadow.top/posts/aircard-ios-26-4-windows-build/">
+  <meta property="article:published_time" content="2026-09-29">
+  <meta property="og:image" content="https://rnadow.top/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://rnadow.top/og-image.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23B4623D'/%3E%3Ctext x='50' y='71' font-size='56' font-weight='700' text-anchor='middle' fill='%23F6F1E7' font-family='Georgia'%3Er%3C/text%3E%3C/svg%3E">
+  <script>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t;}());</script>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+  <header class="site-header" id="site-header"><nav class="container"><a class="logo" href="../../index.html">rnadow<span>.top</span></a><ul class="nav-links"><li><a href="../../index.html#posts">文章</a></li><li><a href="../../index.html#about">关于</a></li></ul><button class="theme-toggle" id="theme-toggle" aria-label="切换深色 / 浅色模式" title="切换主题"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button></nav></header>
+
+  <main><article class="container article">
+    <header class="article-header"><div class="post-meta"><time datetime="2026-09-29">2026-09-29</time><span class="tags-mini"><span class="mini-tag">iOS</span><span class="mini-tag">开源</span><span class="mini-tag">教程</span></span><span>阅读约 10 分钟</span></div><h1>在 Windows 上构建 AirCard-iOS 26.4：配对、探针与多卡精准识别</h1><p class="article-lead">这次目标很具体：在 Windows 上得到可签名的 AirCard IPA，让 iOS 26.4 先通过安全探针，再解决 Wallet 有 10 张卡时无法确认目标卡的问题。过程中真正难的不是编译，而是 Git 权限、pairing file 和“当前卡”识别。</p></header>
+
+    <div class="article-body">
+      <p>本文记录的是一次真实适配过程。项目源码在 <a href="https://github.com/rnadow/aircard" target="_blank" rel="noopener">rnadow/aircard</a>，独立项目页在 <a href="https://rnadow.github.io/aircard/" target="_blank" rel="noopener">rnadow.github.io/aircard</a>。当前实验包为 <strong>v1.3.3 (2643)</strong>，面向我的 iOS 26.4 测试环境；它不是对所有设备和系统版本的兼容承诺。</p>
+
+      <h2>为什么 Windows 不能直接编译 IPA</h2>
+      <p>iOS 应用最终仍要使用 Apple 的 SDK、Xcode 和签名工具链，Windows 本机无法直接完成这一步。我的做法是让 Windows 只负责提交源码和下载产物，把真正的编译交给 GitHub Actions 的 macOS Runner。</p>
+      <pre><code>winget install --id GitHub.cli
+gh auth login
+
+Set-Location "C:\Projects\AirCard-iOS-26.4"
+powershell -ExecutionPolicy Bypass -File .\build-from-windows.ps1 `
+  -Repository "rnadow/aircard"</code></pre>
+      <p>脚本会推送当前源码、触发工作流、等待构建、下载无签名 IPA，再用 SHA-256 文件核对下载结果。最终产物是 <code>build/AirCard-iOS.ipa</code>，仍需使用自己控制的 SideStore、AltStore、TrollStore、LiveContainer 或其他方式签名安装。</p>
+      <p>两个容易踩到的 Windows 问题：</p>
+      <ul><li><code>gh</code> 无法识别：GitHub CLI 刚安装后，重新打开 PowerShell，让 PATH 生效。</li><li><code>detected dubious ownership</code>：只信任这个仓库的准确路径，不要把整个磁盘加入白名单。</li></ul>
+      <pre><code>git config --global --add safe.directory \
+  "H:/CWD/Documents/ChatGPT/个人/AirCard-iOS-26.4"</code></pre>
+
+      <h2>.p12 不是 pairing file</h2>
+      <p>SideStore 导出的 <code>.p12</code> 是签名证书，用于给 IPA 签名；它不包含 AirCard 与 iPhone 建立 Remote Pairing 所需的设备凭据。AirCard 需要的是 <code>.plist</code>、<code>.mobiledevicepairing</code> 或 <code>.mobilepair</code>。</p>
+      <p>iOS 26 上，开发者模式页面不一定出现“Pair This iPhone”的授权提示。因此 v1.3.2 增加了外部导入。我的可用路径是通过 <a href="https://github.com/nab138/iloader" target="_blank" rel="noopener">iLoader</a> 处理：</p>
+      <ol><li>执行 <strong>Delete Stored Pairing</strong>；</li><li>重新连接手机，并在 iPhone 上点“信任”；</li><li>进入 <strong>Manage Pairing File</strong>，选择 <strong>Place</strong>；</li><li>将生成的配对文件导入 AirCard。</li></ol>
+      <p>连接设备前还要保持 LocalDevVPN 或 SideStore WireGuard 这类回环 VPN 运行。若日志出现 <code>failed to parse raw pairing file from bytes</code>，先检查是否误选了 <code>.p12</code>，再检查回环隧道是否真的启动。SideStore 官方的 <a href="https://docs.sidestore.io/docs/advanced/pairing-file" target="_blank" rel="noopener">pairing file 文档</a>也说明了配对文件的用途与生成流程。</p>
+
+      <h2>先用 canary 验证，不直接碰 Wallet</h2>
+      <p>仅把 Deployment Target 改成 iOS 26.4，不能证明 AirTraffic 路径可用。这个分支加入了兼容性探针：它在 <code>/var/mobile/Library/Caches</code> 下写入随机 canary，通过 AirTraffic 导出并校验完全相同的字节，最后清理临时对象。</p>
+      <blockquote><p>探针不写入 Passbook，也不修改 Wallet。只有回环网络、配对、AFC、AirTraffic、遍历写入、回读和清理都成功，结果才会显示绿色。</p></blockquote>
+      <p>这一步把“连接成功”和“确实具备可控写入/回读能力”区分开了。如果探针失败，应导出阶段日志定位问题；不要在未知状态下直接测试批量卡面。</p>
+
+      <h2>10 张卡时，为什么扫描结果不等于目标卡</h2>
+      <p>兼容性探针通过后，新的问题出现了：Wallet 中有 10 张卡，扫描能列出多个哈希，但不能确认哪一个对应当前想修改的卡。通用日志可能包含枚举、缓存刷新和历史卡片信息，因此“最后出现的哈希”并不是可靠依据。</p>
+      <p>v1.3.3 的处理方式是区分<strong>发现卡片</strong>与<strong>卡片获得前台焦点</strong>。正确操作顺序是：</p>
+      <ol><li>在 AirCard 开始扫描；</li><li>打开 Wallet，点进真正想换卡面的那一张；</li><li>等待 AirCard 中唯一的条目出现绿色 <strong>CURRENT CARD</strong> 标记；</li><li>用“银行名 + 尾号四位”添加本地备注；</li><li>给它分配图片，只 Flash 当前选中的一张。</li></ol>
+      <p>普通发现事件只会加入候选列表，不再自动覆盖当前选择。只有明确的焦点事件才会设置 <strong>CURRENT CARD</strong>。这样即使扫描出 10 个标识符，也不会因为后台日志刷新而把目标切到另一张卡。</p>
+
+      <h2>安全边界</h2>
+      <ul><li>AirCard 修改的是设备上的本地视觉缓存，不会修改支付凭据、余额、银行端卡片资料或 Secure Element。</li><li>Pairing record 是当前设备的敏感认证材料，不能提交到 GitHub、博客附件或公开日志。</li><li><code>.p12</code>、UDID、卡片哈希和包含设备标识的完整日志同样不应公开。</li><li>第一次只测试一张卡和一张可随时替换的图片；确认识别准确前不要 Batch Flash。</li><li>无签名 IPA 必须由使用者自己签名，仓库和下载产物不应包含私人证书。</li></ul>
+
+      <h2>这个版本最终解决了什么</h2>
+      <p>从 Windows 构建、外部配对、回环 VPN、AirTraffic 安全探针，到多卡精准识别，这条链路现在已经形成了可重复的操作顺序：<strong>先取得正确 pairing file，再保持隧道运行；先探针验证，再打开目标卡；最后等待 CURRENT CARD，只写一张。</strong></p>
+      <p>上游项目是 <a href="https://github.com/Mak5er/AirCard-iOS" target="_blank" rel="noopener">Mak5er/AirCard-iOS</a>，底层研究来自 <a href="https://github.com/0xjohnnydev/airlift" target="_blank" rel="noopener">AirLift</a>。本分支保留了相关致谢，并把这次 iOS 26.4 的实验适配、Windows 工作流与排错说明公开在仓库 README 中。</p>
+    </div>
+
+    <footer class="article-footer"><div class="article-tip">项目源码、中文 README 与构建工作流均已公开：<a href="https://github.com/rnadow/aircard">GitHub 仓库</a> · <a href="https://rnadow.github.io/aircard/">项目主页</a>。</div><nav class="post-nav" aria-label="上一篇与下一篇"><a class="post-nav-item" href="../chatgpt-plus-bybit-card-lessons/"><span class="nav-label">← 上一篇 · 更早</span><span class="nav-title">开通 ChatGPT Plus 踩坑记</span></a><span class="post-nav-item next empty-nav" aria-hidden="true"></span></nav><a class="back-home" href="../../index.html#posts">← 返回文章列表</a></footer>
+  </article></main>
+  <footer class="site-footer"><div class="container"><p>© <span id="year">2026</span> rnadow · <a href="https://rnadow.top">rnadow.top</a> · 保留所有权利</p><p>由热爱驱动 · 手写 HTML &amp; CSS · <a href="https://rnadow.top/feed.xml">RSS 订阅</a></p></div></footer>
+  <script src="../../script.js"></script>
+</body>
+</html>
