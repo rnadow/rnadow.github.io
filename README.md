@@ -16,6 +16,9 @@ rnadow-blog/
 ├── feed.xml              # RSS 订阅源（发新文章后手动加一条 <item>）
 ├── sitemap.xml           # 站点地图
 ├── robots.txt
+├── cards/
+│   ├── README.md         # 卡面工坊说明：功能、规格，以及配合 AirCard 写入钱包的流程
+│   └── custom.html       # 个性卡面工坊：ISO 7810 ID-1 超清卡面生成器（纯前端单文件）
 ├── assets/
 │   └── hero-desk.jpg     # 首页拱形配图（清晨书桌）
 ├── og-image.png          # 社交分享预览图（1280×640，og:image / GitHub Social preview 共用）
@@ -43,6 +46,18 @@ npx serve .
 ```
 
 然后访问 <http://localhost:8080>。
+
+## 独立工具页
+
+### 卡面工坊 · `cards/custom.html`
+
+纯前端零依赖的 **ISO 7810 ID-1** 卡面生成器：上传底图与 Logo、参考图对位、精细裁剪（锁定 1.586 : 1）、
+智能去白色底与外描边，一键导出 1536 × 969 超清 PNG，再配合 **[AirCard](https://aircardios.github.io/)** 写入 Apple 钱包卡面。
+图片全程只在浏览器本地处理，不上传服务器。
+
+- 在线使用：<https://rnadow.github.io/cards/custom.html>
+- 详细说明：[cards/README.md](cards/README.md)
+- AirCard：[官网与中文文档](https://aircardios.github.io/) · [本机构建（iOS 26.4，MIT）](https://github.com/rnadow/aircard) · [Windows 构建记录](https://rnadow.top/posts/aircard-ios-26-4-windows-build/)
 
 ## 如何发布新文章
 
